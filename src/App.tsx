@@ -15,7 +15,7 @@ function App() {
     const state = useSelector((state: RootState) => state.loginReducer);
     const navigateFunction = useNavigate();
     useEffect(() => {
-        console.log(state.user);
+        // console.log(state.user);
         if (!state.user) {
             navigateFunction(`${homepage}/login`)
         }

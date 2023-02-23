@@ -7,6 +7,7 @@ import axios from "axios";
 import qs from "qs";
 import {ResponseScorm} from "./Model/ResponseScorm";
 import {ResponseScore} from "./Model/ResponseScore";
+import {useNavigate} from "react-router-dom";
 
 interface TempScore {
     scormId: number,
@@ -17,6 +18,7 @@ export function Home() {
     const state = useSelector((state: RootState) => state.loginReducer);
     const [course, setCourse] = useState<Course[]>([])
     const [score, setScore] = useState<TempScore[]>([])
+    const navigateFunction = useNavigate();
     useEffect(() => {
     }, [score])
 
@@ -86,8 +88,8 @@ export function Home() {
 
     function getScore(id: number) {
         let ret: number = 9999;
-        console.log('idid', id);
-        console.log('scorescore', score);
+        // console.log('idid', id);
+        // console.log('scorescore', score);
         const find = score.find(value => value.scormId === id);
         let value1 = find?.scorm.data.tracks.find(value => value.element === 'score_raw')
         return value1?.value;
@@ -101,7 +103,7 @@ export function Home() {
                         <div className="card-body">
                             <h5 className="card-title"><strong>Full name</strong> {value.fullname}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">
-                                <strong>Display name</strong> {value.displayname}
+                                <strong>Short name</strong> {value.shortname}
                             </h6>
                             <h6 className="card-subtitle mb-2 text-muted">
                                 <strong>id</strong> {value.id}
@@ -111,7 +113,7 @@ export function Home() {
                                     {
                                         value.scorms.map(value1 => {
                                             const score1 = getScore(value1.launch);
-                                            console.log('score1score1', score1);
+                                            // console.log('score1score1', score1);
                                             return (
                                                 <li key={value1.id} className="list-group-item" style={{
                                                     cursor: 'pointer'
@@ -156,7 +158,9 @@ export function Home() {
             <div className={"container"}>
                 <div className={"row"}>
                     <div className={"col-12 mt-3"}>
-                        <button className={'btn btn-info'}>
+                        <button className={'btn btn-info'} onClick={function () {
+                            navigateFunction(`${process.env.PUBLIC_URL}/course/create`)
+                        }}>
                             Create Course
                         </button>
                     </div>
