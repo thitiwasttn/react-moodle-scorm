@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-eval' 'unsafe-inline' data: gap: http://10.30.1.10 'unsafe-eval'; frame-src *; connect-src *; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <title>Title</title>
+</head>
+<body>
+<form action="http://10.30.1.10/moodle/login/index.php" target="myIframe" method="POST">
+  <button type="submit">sumbit</button>
+  <input type="hidden" name="username" value="admin"/>
+  <input type="hidden" name="password" value="P@ssw0rd"/>
+  <input type="hidden" name="redir"
+         value={"/mod/scorm/player.php?a=1&scoid=2&display=popup&mode=normal"}/>
+  {/*<input type="hidden" name={"logintoken"} value={"a3f3a1ff1cd77bbbae1c6fe1e9a0d679"}/>*/}
+</form>
+
+<iframe src="" name="myIframe" width={"1500px"} height={"800px"}> </iframe>
+</body>
+</html>
