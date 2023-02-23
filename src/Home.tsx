@@ -118,10 +118,24 @@ export function Home() {
                                                 <li key={value1.id} className="list-group-item" style={{
                                                     cursor: 'pointer'
                                                 }} onClick={function () {
-                                                    window.open(
-                                                        `${process.env.PUBLIC_URL}/quiz?a=${value1.id}&scoid=${value1.launch}`,
-                                                        '_blank' // <- This is what makes it open in a new window.
-                                                    );
+
+                                                    const query2 = qs.stringify({
+                                                        wstoken: `${process.env.REACT_APP_ADMIN_TOKEN_GVENT}`,
+                                                        wsfunction: "enrol_manual_enrol_users",
+                                                        moodlewsrestformat: 'json',
+                                                        'enrolments[0][roleid]': 5,
+                                                        'enrolments[0][userid]': state.user?.user.id,
+                                                        'enrolments[0][courseid]': value.id
+                                                    }, {
+                                                        encodeValuesOnly: true, // prettify URL
+                                                    });
+                                                    axios.post<ResponseScore>(`${process.env.REACT_APP_API_ENDPOINT}/webservice/rest/server.php?${query2}`).then(value => {
+                                                        window.open(
+                                                            `${process.env.PUBLIC_URL}/quiz?a=${value1.id}&scoid=${value1.launch}`,
+                                                            '_blank' // <- This is what makes it open in a new window.
+                                                        );
+                                                    })
+
                                                 }}>
                                                     <div className={"row"}>
                                                         <div className={"col-12"}>
