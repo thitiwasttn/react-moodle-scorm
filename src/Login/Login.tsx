@@ -17,6 +17,7 @@ export function Login() {
     }>({
         password: "", username: ""
     })
+
 const navigateFunction = useNavigate();
     useEffect(() => {
         if (state.user) {
@@ -52,6 +53,7 @@ const navigateFunction = useNavigate();
                         "username": data2[0].username,
                         "user": data2[0]
                     })
+                    navigateFunction(`${process.env.PUBLIC_URL}/`)
                 })
             }
         })
