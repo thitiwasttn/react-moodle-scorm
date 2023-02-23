@@ -18,7 +18,6 @@ export function Home() {
     const [course, setCourse] = useState<Course[]>([])
     const [score, setScore] = useState<TempScore[]>([])
     useEffect(() => {
-        console.log('score ', score);
     }, [score])
 
     async function loadData() {
@@ -67,7 +66,6 @@ export function Home() {
                         const data = value.data;
                         return data;
                     })
-                    console.log('resScore', resScore);
                     tempScores.push({
                         scorm: resScore,
                         scormId: scorm.launch
@@ -87,11 +85,9 @@ export function Home() {
     }, [])
 
     function getScore(id: number) {
-        console.log('id', id);
         let ret: number = 9999;
         const find = score.find(value => value.scormId === id);
         let value1 = find?.scorm.data.tracks.find(value => value.element === 'score_raw')
-        console.log('value1', value1);
         return value1?.value;
     }
 
@@ -112,6 +108,7 @@ export function Home() {
                                 <ul className="list-group">
                                     {
                                         value.scorms.map(value1 => {
+                                            const score1 = getScore(value.id);
                                             return (
                                                 <>
                                                     <li className="list-group-item">
@@ -119,8 +116,8 @@ export function Home() {
                                                             <div className={"col-12"}>
                                                                 {value1.name}
                                                             </div>
-                                                            <div className={"col-12"}>
-                                                                Score: {getScore(value.id)}
+                                                            <div className={"col-12"} hidden={score1 === ''}>
+                                                                Score: {score1}
                                                             </div>
                                                         </div>
                                                     </li>
