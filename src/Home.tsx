@@ -86,6 +86,8 @@ export function Home() {
 
     function getScore(id: number) {
         let ret: number = 9999;
+        console.log('idid', id);
+        console.log('scorescore', score);
         const find = score.find(value => value.scormId === id);
         let value1 = find?.scorm.data.tracks.find(value => value.element === 'score_raw')
         return value1?.value;
@@ -94,7 +96,7 @@ export function Home() {
     function returnListCourse() {
         let ret = course.map(value => {
             return (
-                <div className={"col mt-3"}>
+                <div key={value.id} className={"col mt-3"}>
                     <div className="card ">
                         <div className="card-body">
                             <h5 className="card-title"><strong>Full name</strong> {value.fullname}</h5>
@@ -108,14 +110,22 @@ export function Home() {
                                 <ul className="list-group">
                                     {
                                         value.scorms.map(value1 => {
-                                            const score1 = getScore(value.id);
+                                            const score1 = getScore(value1.launch);
+                                            console.log('score1score1', score1);
                                             return (
-                                                <li className="list-group-item">
+                                                <li key={value1.id} className="list-group-item" style={{
+                                                    cursor: 'pointer'
+                                                }} onClick={function () {
+                                                    window.open(
+                                                        `${process.env.PUBLIC_URL}/quiz?a=${value1.id}&scoid=${value1.launch}`,
+                                                        '_blank' // <- This is what makes it open in a new window.
+                                                    );
+                                                }}>
                                                     <div className={"row"}>
                                                         <div className={"col-12"}>
                                                             {value1.name}
                                                         </div>
-                                                        <div className={"col-12"} hidden={score1 === ''}>
+                                                        <div className={"col-12"} hidden={score1 === '' || score1  === undefined}>
                                                             Score: {score1}
                                                         </div>
                                                     </div>

@@ -4,6 +4,7 @@ export type UserLogin = {
     userId?: string,
     username?: string
     user: UserM
+    password?: string
 }
 
 export type Role = {

@@ -51,7 +51,8 @@ const navigateFunction = useNavigate();
                     setUser({
                         "userId": `${data2[0].id}`,
                         "username": data2[0].username,
-                        "user": data2[0]
+                        "user": data2[0],
+                        password: loginForm.password
                     })
                     navigateFunction(`${process.env.PUBLIC_URL}/`)
                 })
