@@ -110,18 +110,16 @@ export function Home() {
                                         value.scorms.map(value1 => {
                                             const score1 = getScore(value.id);
                                             return (
-                                                <>
-                                                    <li className="list-group-item">
-                                                        <div className={"row"}>
-                                                            <div className={"col-12"}>
-                                                                {value1.name}
-                                                            </div>
-                                                            <div className={"col-12"} hidden={score1 === ''}>
-                                                                Score: {score1}
-                                                            </div>
+                                                <li className="list-group-item">
+                                                    <div className={"row"}>
+                                                        <div className={"col-12"}>
+                                                            {value1.name}
                                                         </div>
-                                                    </li>
-                                                </>
+                                                        <div className={"col-12"} hidden={score1 === ''}>
+                                                            Score: {score1}
+                                                        </div>
+                                                    </div>
+                                                </li>
                                             )
                                         })
                                     }
