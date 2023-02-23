@@ -4,10 +4,22 @@ import './App.css';
 import axios from 'axios';
 import qs from 'qs';
 import {AppRouter} from "./AppRouter";
+import {useSelector} from "react-redux";
+import {RootState} from "./Reducers/login_reducer";
+import {useNavigate} from "react-router-dom";
 
 const token = 'a3f3a1ff1cd77bbbae1c6fe1e9a0d679';
+const homepage = process.env.PUBLIC_URL;
 
 function App() {
+    const state = useSelector((state: RootState) => state.loginReducer);
+    const navigateFunction = useNavigate();
+    useEffect(() => {
+        console.log(state.user);
+        if (!state.user) {
+            navigateFunction(`${homepage}/login`)
+        }
+    }, [])
     return (
         <>
             <AppRouter/>

@@ -1,7 +1,7 @@
 import {Dispatch} from "redux"
 import {ActionType} from "../action_type"
 import {Action} from "../action";
-import {AdminLogin} from "../../../Login/Model/AdminLogin";
+import {UserLogin} from "../../../Login/Model/AdminLogin";
 // import {AdminLogin} from "../../../Features/Login/Model/AdminLogin";
 
 export const setToken = (token?: string) => {
@@ -26,12 +26,12 @@ export const setUserId = (adminId?: string) => {
     }
 }
 
-export const setUser = (admin?: AdminLogin) => {
+export const setUser = (admin?: UserLogin) => {
     return (dispatch: Dispatch<Action>) => {
         dispatch({
             type: ActionType.SET_ALL,
             payload: {
-                admin: admin
+                user: admin
             }
         })
     }

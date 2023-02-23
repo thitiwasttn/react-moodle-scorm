@@ -1,11 +1,9 @@
-export type AdminLogin = {
-    adminId?: string,
-    email?: string
-    firstName?: string,
-    lastName?: string,
-    accessToken?: string,
-    roles: Role[],
-    telno: string
+import {UserM} from "../../Model/UserM";
+
+export type UserLogin = {
+    userId?: string,
+    username?: string
+    user: UserM
 }
 
 export type Role = {

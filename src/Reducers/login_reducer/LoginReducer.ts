@@ -1,11 +1,11 @@
 import {Action} from "./action";
 import {ActionType} from "./action_type";
-import {AdminLogin} from "../../Login/Model/AdminLogin";
+import {UserLogin} from "../../Login/Model/AdminLogin";
 
 export type State = {
     adminId?: string
     token?: string
-    admin?: AdminLogin
+    user?: UserLogin
 };
 
 let initState = {
@@ -27,7 +27,7 @@ const tokenReducer = (state: State = initState, action: Action): State => {
         case ActionType.SET_ALL:
             return {
                 ...state,
-                admin: action.payload.admin,
+                user: action.payload.user,
             }
         default:
             return state
