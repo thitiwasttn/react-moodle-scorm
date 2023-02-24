@@ -95,6 +95,41 @@ export function Home() {
         return value1?.value;
     }
 
+    function openAddScorm(courseId: number) {
+        let mapForm = document.createElement("form");
+        mapForm.target = "Map";
+        mapForm.method = "POST"; // or "post" if appropriate
+        mapForm.action = `${process.env.REACT_APP_API_ENDPOINT}/login/index.php`;
+
+        let mapInput = document.createElement("input");
+        mapInput.type = "hidden";
+        mapInput.name = "username";
+        mapInput.value = "admin";
+        mapForm.appendChild(mapInput);
+
+        let mapInput2 = document.createElement("input");
+        mapInput2.type = "hidden";
+        mapInput2.name = "password";
+        mapInput2.value = "P@ssw0rd";
+        mapForm.appendChild(mapInput2);
+
+        let mapInput3 = document.createElement("input");
+        mapInput3.type = "hidden";
+        mapInput3.name = "redir";
+        mapInput3.value = `/course/modedit.php?sr=0&add=scorm&section=0&course=${courseId}&display=popup`;
+        mapForm.appendChild(mapInput3);
+
+        document.body.appendChild(mapForm);
+
+        let map = window.open("", "Map", "height=600,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes");
+
+        if (map) {
+            mapForm.submit();
+        } else {
+            alert('You must allow popups for this map to work.');
+        }
+    }
+
     function returnListCourse() {
         let ret = course.map(value => {
             return (
@@ -108,7 +143,13 @@ export function Home() {
                             <h6 className="card-subtitle mb-2 text-muted">
                                 <strong>id</strong> {value.id}
                             </h6>
+                            <button className={"btn btn-secondary mb-2"} onClick={function () {
+                                openAddScorm(value.id)
+                            }}>
+                                Add Quiz
+                            </button>
                             <div className="card-text" hidden={value.scorms.length === 0}>
+
                                 <ul className="list-group">
                                     {
                                         value.scorms.map(value1 => {
@@ -141,7 +182,8 @@ export function Home() {
                                                         <div className={"col-12"}>
                                                             {value1.name}
                                                         </div>
-                                                        <div className={"col-12"} hidden={score1 === '' || score1  === undefined}>
+                                                        <div className={"col-12"}
+                                                             hidden={score1 === '' || score1 === undefined}>
                                                             Score: {score1}
                                                         </div>
                                                     </div>
